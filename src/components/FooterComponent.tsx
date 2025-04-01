@@ -1,19 +1,13 @@
-import React from "react";
+
 import {
   faWhatsapp,
-  faTwitter,
-  faFacebook,
-  faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faPhone,
-  faEnvelope,
-  faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Separator } from "./ui/separator";
 const FooterComponent = () => {
-  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-gray-800 text-white py-4">

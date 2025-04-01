@@ -1,6 +1,5 @@
-import { faShoppingCart, faTrashAlt, faTruckMoving } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart, faTruckMoving } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
 
 // Image fallback constant
 export const TABLET_CAPSULE_IMAGE_FALLBACK =

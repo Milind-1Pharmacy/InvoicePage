@@ -1,6 +1,5 @@
 import {
   faUser,
-  faFileInvoice,
   faCircleCheck,
   faSmileBeam,
 } from "@fortawesome/free-solid-svg-icons";
