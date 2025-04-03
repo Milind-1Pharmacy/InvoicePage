@@ -1,14 +1,8 @@
-
-import {
-  faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
-import {
-  faPhone,
-} from "@fortawesome/free-solid-svg-icons";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Separator } from "./ui/separator";
+import { Separator } from "../ui/separator";
 const FooterComponent = () => {
-
   return (
     <footer className="bg-gray-800 text-white py-4 relative bottom-0 ">
       <div className="container mx-auto px-4">

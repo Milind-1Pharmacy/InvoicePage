@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import logo from "../assets/1P-LOGO.svg";
-import { Separator } from "../components/ui/separator";
+import { StoreLogo } from "@/assets";
+import { Separator } from "../ui/separator";
 import React from "react";
 
 interface HeaderProps {
@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <div className="bg-white p-2 rounded-full flex-shrink-0 w-12 h-12 shadow-sm flex items-center justify-center">
             <img
-              src={logo}
+              src={StoreLogo}
               alt="Store Logo"
               className="h-full w-full object-contain"
             />
@@ -65,7 +65,11 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
               className="p-2 rounded-full hover:bg-blue-500 transition-colors duration-200"
               aria-label="Call us"
             >
-              <FontAwesomeIcon icon={faPhone} className="text-white" size="lg"/>
+              <FontAwesomeIcon
+                icon={faPhone}
+                className="text-white"
+                size="lg"
+              />
             </a>
           </div>
         )}

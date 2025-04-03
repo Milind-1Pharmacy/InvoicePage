@@ -52,8 +52,6 @@ const UserInvoiceInfo = () => {
       {/* Invoice details component */}
       <InvoiceDetails />
       {/* <UserCartDetail /> */}
-
-      {/* Footer note */}
     </div>
   );
 };
