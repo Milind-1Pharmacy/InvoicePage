@@ -7,23 +7,23 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import  { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const InvoiceDetails = () => {
-  const [expanded, setExpanded] = useState(false);
-  const [contentHeight, setContentHeight] = useState(0);
-  const contentRef = useRef<HTMLDivElement>(null);
+  // const [expanded, setExpanded] = useState(false);
+  // const [contentHeight, setContentHeight] = useState(0);
+  // const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (contentRef.current) {
-      // Get the full height of the content when it's mounted or updated
-      setContentHeight(expanded ? contentRef.current.scrollHeight : 0);
-    }
-  }, [expanded]);
+  // useEffect(() => {
+  //   if (contentRef.current) {
+  //     // Get the full height of the content when it's mounted or updated
+  //     setContentHeight(expanded ? contentRef.current.scrollHeight : 0);
+  //   }
+  // }, [expanded]);
 
-  const toggleExpand = () => {
-    setExpanded(!expanded);
-  };
+  // const toggleExpand = () => {
+  //   setExpanded(!expanded);
+  // };
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden mt-3 border border-gray-100">
@@ -67,26 +67,15 @@ const InvoiceDetails = () => {
       </div>
 
       {/* Details toggle button */}
-      <div
-        className="px-5 py-4 border-t border-gray-100 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition-colors duration-200"
-        onClick={toggleExpand}
-      >
+      <div className="px-5 py-4 border-t border-gray-100 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition-colors duration-200">
         <span className="font-medium text-gray-700">Invoice Details</span>
-        <FontAwesomeIcon
-          icon={faChevronRight}
-          className={`text-gray-400 transition-transform duration-300 ${
-            expanded ? "rotate-90" : ""
-          }`}
-        />
       </div>
 
       {/* Expandable content with smooth animation */}
       <div
-        ref={contentRef}
         className="px-5 bg-gray-50 border-t border-gray-100 overflow-hidden"
         style={{
           transition: "max-height 0.4s ease-in-out",
-          maxHeight: `${contentHeight}px`,
         }}
       >
         <div className="py-4">

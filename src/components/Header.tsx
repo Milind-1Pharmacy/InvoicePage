@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
       <div className="max-w-7xl mx-auto py-3 px-4 flex items-center justify-between">
         {/* Logo and Store Name */}
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <div className="bg-white p-2 rounded-full flex-shrink-0 w-10 h-10 shadow-sm flex items-center justify-center">
+          <div className="bg-white p-2 rounded-full flex-shrink-0 w-12 h-12 shadow-sm flex items-center justify-center">
             <img
               src={logo}
               alt="Store Logo"
@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
             >
               <FontAwesomeIcon
                 icon={faWhatsapp}
-                size="lg"
+                size="xl"
                 className="text-white"
               />
             </a>
@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
               className="p-2 rounded-full hover:bg-blue-500 transition-colors duration-200"
               aria-label="Call us"
             >
-              <FontAwesomeIcon icon={faPhone} className="text-white" />
+              <FontAwesomeIcon icon={faPhone} className="text-white" size="lg"/>
             </a>
           </div>
         )}

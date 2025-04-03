@@ -10,7 +10,7 @@ import { Separator } from "./ui/separator";
 const FooterComponent = () => {
 
   return (
-    <footer className="bg-gray-800 text-white py-4">
+    <footer className="bg-gray-800 text-white py-4 relative bottom-0 ">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
 
