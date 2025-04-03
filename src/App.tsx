@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@/services/contextProvider/theme-provider";
 import Header from "./components/Header";
-import UserInvoiceInfo from "./components/UserInvoiceInfo";
+import UserInvoiceInfo from "./components/InvoiceComponents/UserInvoiceInfo";
 import FooterComponent from "./components/FooterComponent";
 
 function App() {

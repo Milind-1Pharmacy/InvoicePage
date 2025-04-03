@@ -1,7 +1,10 @@
 import { TABLET_CAPSULE_IMAGE_FALLBACK } from "@/utils/constants/Fallbacks";
-import { faShoppingCart, faTruckMoving } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShoppingCart,
+  faTruckMoving,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CartItemCard from "./HouseOfCards/CartItemCard";
+import CartItemCard from "../HouseOfCards/CartItemCard";
 // Main Cart Invoice Component
 const UserCartDetail = () => {
   // Sample cart items

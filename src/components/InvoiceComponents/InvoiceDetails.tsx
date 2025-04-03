@@ -4,10 +4,8 @@ import {
   faCalendarAlt,
   faList,
   faFileInvoice,
-  faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useRef, useEffect } from "react";
 
 const InvoiceDetails = () => {
   // const [expanded, setExpanded] = useState(false);
