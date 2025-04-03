@@ -1,4 +1,4 @@
-import { RUPEE_SYMBOL } from "@/utils/constants";
+import { RUPEE_SYMBOL } from "@/utils";
 import { TABLET_CAPSULE_IMAGE_FALLBACK } from "@/utils/constants/Fallbacks";
 const CartItemCard = (props: any) => {
   const { item } = props;

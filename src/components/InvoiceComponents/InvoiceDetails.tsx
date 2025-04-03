@@ -1,4 +1,4 @@
-import { RUPEE_SYMBOL } from "@/utils/constants";
+import { RUPEE_SYMBOL } from "@/utils";
 import {
   faDownload,
   faCalendarAlt,
@@ -7,7 +7,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const InvoiceDetails = () => {
+interface InvoiceDetailsProps {
+  invoiceId: string;
+}
+//this all will be fetch from the Context
+const InvoiceDetails = ({ invoiceId }: InvoiceDetailsProps) => {
   // const [expanded, setExpanded] = useState(false);
   // const [contentHeight, setContentHeight] = useState(0);
   // const contentRef = useRef<HTMLDivElement>(null);
@@ -40,7 +44,7 @@ const InvoiceDetails = () => {
             </div>
             <div>
               <h2 className="text-xl font-semibold text-gray-800">Invoice</h2>
-              <p className="text-gray-500 text-sm">#INV-20231027</p>
+              <p className="text-gray-500 text-sm">#{invoiceId}</p>
             </div>
           </div>
         </div>

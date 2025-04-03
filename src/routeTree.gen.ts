@@ -11,16 +11,10 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as InvoiceImport } from './routes/invoice'
 import { Route as TrackingItemIdImport } from './routes/tracking/$itemId'
+import { Route as InvoicesInvoiceIdImport } from './routes/invoices/$invoiceId'
 
 // Create/Update Routes
-
-const InvoiceRoute = InvoiceImport.update({
-  id: '/invoice',
-  path: '/invoice',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const TrackingItemIdRoute = TrackingItemIdImport.update({
   id: '/tracking/$itemId',
@@ -28,15 +22,21 @@ const TrackingItemIdRoute = TrackingItemIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const InvoicesInvoiceIdRoute = InvoicesInvoiceIdImport.update({
+  id: '/invoices/$invoiceId',
+  path: '/invoices/$invoiceId',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/invoice': {
-      id: '/invoice'
-      path: '/invoice'
-      fullPath: '/invoice'
-      preLoaderRoute: typeof InvoiceImport
+    '/invoices/$invoiceId': {
+      id: '/invoices/$invoiceId'
+      path: '/invoices/$invoiceId'
+      fullPath: '/invoices/$invoiceId'
+      preLoaderRoute: typeof InvoicesInvoiceIdImport
       parentRoute: typeof rootRoute
     }
     '/tracking/$itemId': {
@@ -52,37 +52,37 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/invoice': typeof InvoiceRoute
+  '/invoices/$invoiceId': typeof InvoicesInvoiceIdRoute
   '/tracking/$itemId': typeof TrackingItemIdRoute
 }
 
 export interface FileRoutesByTo {
-  '/invoice': typeof InvoiceRoute
+  '/invoices/$invoiceId': typeof InvoicesInvoiceIdRoute
   '/tracking/$itemId': typeof TrackingItemIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/invoice': typeof InvoiceRoute
+  '/invoices/$invoiceId': typeof InvoicesInvoiceIdRoute
   '/tracking/$itemId': typeof TrackingItemIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/invoice' | '/tracking/$itemId'
+  fullPaths: '/invoices/$invoiceId' | '/tracking/$itemId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/invoice' | '/tracking/$itemId'
-  id: '__root__' | '/invoice' | '/tracking/$itemId'
+  to: '/invoices/$invoiceId' | '/tracking/$itemId'
+  id: '__root__' | '/invoices/$invoiceId' | '/tracking/$itemId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  InvoiceRoute: typeof InvoiceRoute
+  InvoicesInvoiceIdRoute: typeof InvoicesInvoiceIdRoute
   TrackingItemIdRoute: typeof TrackingItemIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  InvoiceRoute: InvoiceRoute,
+  InvoicesInvoiceIdRoute: InvoicesInvoiceIdRoute,
   TrackingItemIdRoute: TrackingItemIdRoute,
 }
 
@@ -96,12 +96,12 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/invoice",
+        "/invoices/$invoiceId",
         "/tracking/$itemId"
       ]
     },
-    "/invoice": {
-      "filePath": "invoice.tsx"
+    "/invoices/$invoiceId": {
+      "filePath": "invoices/$invoiceId.tsx"
     },
     "/tracking/$itemId": {
       "filePath": "tracking/$itemId.tsx"

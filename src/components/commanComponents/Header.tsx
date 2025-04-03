@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
       <div className="max-w-7xl mx-auto py-3 px-4 flex items-center justify-between">
         {/* Logo and Store Name */}
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <div className="bg-white p-2 rounded-full flex-shrink-0 w-12 h-12 shadow-sm flex items-center justify-center">
+          <div className="bg-white p-2 rounded-full flex-shrink-0 w-11 h-11 shadow-sm flex items-center justify-center">
             <img
               src={StoreLogo}
               alt="Store Logo"
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
           </div>
 
           <h1
-            className="text-xl font-medium text-white truncate"
+            className="text-xl font-medium text-white truncate line-clamp-1"
             title={storeName} // Shows full name on hover
           >
             {storeName}

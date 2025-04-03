@@ -5,9 +5,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InvoiceDetails from "./InvoiceDetails";
+import { useParams } from "@tanstack/react-router";
 // import UserCartDetail from "./UserCartDetail";
 
 const UserInvoiceInfo = () => {
+  const { invoiceId } = useParams({ from: "/invoices/$invoiceId" });
+
   return (
     <div className="bg-white rounded-xl shadow-sm py-4 px-3 mt-4 sm:mx-3 max-w-md mb-4 mx-3">
       <div className="flex items-center mb-3 relative overflow-hidden p-4 rounded-2xl border border-gray-100">
@@ -50,7 +53,7 @@ const UserInvoiceInfo = () => {
         </div>
       </div>
       {/* Invoice details component */}
-      <InvoiceDetails />
+      <InvoiceDetails invoiceId= {invoiceId}/>
       {/* <UserCartDetail /> */}
     </div>
   );
