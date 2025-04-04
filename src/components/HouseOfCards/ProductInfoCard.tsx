@@ -61,7 +61,7 @@ const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
     <div className="w-full mx-auto  ">
       <div
         ref={cardRef}
-        className="group relative  border-b border-blue-100 transition-all duration-300 overflow-hidden animate__animated opacity-0"
+        className="group relative transition-all duration-300 overflow-hidden animate__animated opacity-0"
         style={{ opacity: 0 }}
       >
         {/* Main card content */}
