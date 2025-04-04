@@ -2,7 +2,7 @@ import { TABLET_CAPSULE_IMAGE_FALLBACK } from "@/utils";
 
 export default {
   id: "12345",
-  photo: TABLET_CAPSULE_IMAGE_FALLBACK,
+  imgUrl: TABLET_CAPSULE_IMAGE_FALLBACK,
   name: "Paracetamol 500mg",
   description: "A pack of 10 tablets",
   packs: 10,
@@ -52,3 +52,4 @@ export default {
     },
   ],
 };
+//isGSTinVserfirs

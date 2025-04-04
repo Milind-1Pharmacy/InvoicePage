@@ -2,18 +2,16 @@ import { useEffect, useRef } from "react";
 import "animate.css";
 
 interface ProductData {
-  photo?: string;
+  imgUrl?: string;
   name?: string;
   description?: string;
   packs?: number;
   mrp?: string;
 }
 
-const PharmacyProductCard = ({ product }: { product: ProductData }) => {
+const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const circleOneRef = useRef<HTMLDivElement>(null);
-  const circleTwoRef = useRef<HTMLDivElement>(null);
   const underlineRef = useRef<HTMLSpanElement>(null);
 
   // Merge with defaults for any missing values
@@ -26,24 +24,10 @@ const PharmacyProductCard = ({ product }: { product: ProductData }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             if (cardRef.current) {
-              cardRef.current.classList.add("animate__fadeInUp");
               cardRef.current.style.opacity = "1";
             }
             if (imageRef.current) {
               imageRef.current.classList.add(
-                "animate__pulse",
-                "animate__infinite",
-                "animate__slower"
-              );
-            }
-            if (circleOneRef.current) {
-              circleOneRef.current.classList.add(
-                "animate__pulse",
-                "animate__infinite"
-              );
-            }
-            if (circleTwoRef.current) {
-              circleTwoRef.current.classList.add(
                 "animate__pulse",
                 "animate__infinite",
                 "animate__slower"
@@ -74,77 +58,54 @@ const PharmacyProductCard = ({ product }: { product: ProductData }) => {
   }, []);
 
   return (
-    <div className="w-full justify-between items-center mx-auto">
+    <div className="w-full mx-auto  ">
       <div
         ref={cardRef}
-        className="group relative bg-white rounded-2xl shadow-md transition-all duration-500 overflow-hidden h-full animate__animated opacity-0 items-center justify-center"
-        style={{
-          opacity: 0,
-        }}
+        className="group relative  border-b border-blue-100 transition-all duration-300 overflow-hidden animate__animated opacity-0"
+        style={{ opacity: 0 }}
       >
-        {/* Pulsating circles in background using animate.css */}
-        <div
-          ref={circleOneRef}
-          className="absolute -left-8 -top-8 w-32 h-32 rounded-full bg-[#2e6acf] opacity-10 animate__animated"
-        ></div>
-        <div
-          ref={circleTwoRef}
-          className="absolute -right-32 -bottom-32 w-64 h-64 rounded-full bg-[#2e6acf] opacity-10 animate__animated"
-        ></div>
-
         {/* Main card content */}
-        <div className="flex flex-col p-5 h-full relative z-10 mx-auto w-full">
-          {/* Product image with animation */}
-          <div className="relative mb-5 flex justify-center">
-            <div ref={imageRef}>
+        <div className="flex h-full relative z-10">
+          {/* Left side: Product image with animation */}
+          <div className="w-1/3 p-3  flex items-center justify-center bg-[#f0f6ff]">
+            <div ref={imageRef} className="animate__animated">
               <img
-                src={displayProduct.photo}
+                src={displayProduct.imgUrl}
                 alt={displayProduct.name}
-                className="w-72 h-72 object-contain"
+                className="w-24 h-24 object-contain"
               />
             </div>
           </div>
 
-          {/* Product name with underline effect */}
-          <h2 className="text-xl font-bold mb-4 relative pb-2 break-words whitespace-normal line-clamp-2 overflow-hidden">
-            {displayProduct.name}
-            <div className="my-2 bg-[#f0f6ff] border border-gray-300 rounded-lg py-2 px-3 ">
-              <p
-                className="text-sm  text-slate-600 opacity-1000
-            justify-center items-center"
-              >
-                {displayProduct.description}
-              </p>
-            </div>{" "}
-            <span
-              ref={underlineRef}
-              className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2e6acf] transition-all duration-1000"
-            ></span>
-          </h2>
+          {/* Right side: Product details */}
+          <div className="w-2/3 p-4 flex flex-col">
+            <h2 className="text-lg font-bold mb-1 relative pb-1 line-clamp-3 overflow-hidden">
+              {displayProduct.name}
+              <span
+                ref={underlineRef}
+                className="absolute bottom-0 left-0 w-0 h-[1px] bg-blue-300 transition-all duration-1000"
+              ></span>
+            </h2>
 
-          {/* Product specs with touch-friendly styling */}
-          <div className="grid grid-cols-2 gap-3 mt-auto">
-            {/* Units/Packs info */}
-            <div className="animate__animated animate__fadeIn animate__delay-1s bg-[#f0f6ff] rounded-lg p-4 transition-all duration-300 active:bg-[#e5eeff] border border-[#2e6acf] border-opacity-10 flex flex-col items-center">
-              <div className="flex items-center justify-center">
-                <span className="text-gray-600 text-lg">Units</span>
-              </div>
-              <div className="text-[#2e6acf] font-bold text-3xl mt-1 flex items-center justify-center">
-                {displayProduct.packs}
-              </div>
-            </div>
+            {/* Description */}
+            <p className="text-xs text-slate-600 mb-2 line-clamp-2 overflow-hidden">
+              {displayProduct.description}
+            </p>
 
-            {/* Price info */}
-            <div className="animate__animated animate__fadeIn animate__delay-1s bg-[#f0f6ff] rounded-lg p-4 transition-all duration-300 active:bg-[#e5eeff] border border-[#2e6acf] border-opacity-10">
-              <div className="flex flex-col items-center">
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-600 text-lg font-medium">
-                    Price
-                  </span>
-                </div>
-                <div className="text-[#2e6acf] font-extrabold text-3xl mt-1">
+            {/* Product specs in a single row layout */}
+            <div className="flex justify-between items-center mt-auto animate__animated animate__fadeIn animate__delay-0.5s flex-wrap-reverse">
+              <div className="flex items-center gap-1">
+                <span className="text-gray-600 text-xs">Units:</span>
+                <span className="text-[#2e6acf] font-bold text-lg">
+                  {displayProduct.packs}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1">
+                <span className="text-gray-600 text-xs">Price:</span>
+                <span className="text-[#2e6acf] font-bold text-lg">
                   {displayProduct.mrp}
-                </div>
+                </span>
               </div>
             </div>
           </div>
@@ -154,4 +115,4 @@ const PharmacyProductCard = ({ product }: { product: ProductData }) => {
   );
 };
 
-export default PharmacyProductCard;
+export default HorizontalPharmacyCard;
