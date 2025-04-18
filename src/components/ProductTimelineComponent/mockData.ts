@@ -24,7 +24,7 @@ export default {
     },
     {
       stage: "Retailer",
-      name: "UrMedz Retail Pvt LTD.",
+      name: "Model Medicals Stores",
       location: "Bangalore, India",
       date: "2025-03-10",
       status: "Available for Purchase",

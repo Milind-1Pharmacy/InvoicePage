@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { UrmedzLogo } from "@/assets";
+import { StoreLogo } from "@/assets";
 import { Separator } from "../ui/separator";
 import React from "react";
 
@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <div className="bg-white p-2 rounded-full flex-shrink-0 w-11 h-11 shadow-sm flex items-center justify-center">
             <img
-              src={UrmedzLogo}
+              src={StoreLogo}
               alt="Store Logo"
               className="h-full w-full object-contain"
             />
