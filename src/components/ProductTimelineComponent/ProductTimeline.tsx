@@ -18,7 +18,6 @@ import {
 import { ProductInfoCard } from "../HouseOfCards";
 import { Product } from "@/utils";
 import { StageContent, StageDetails, StageIcon } from "./TimelineStageItem";
-import { Separator } from "../ui/separator";
 
 const STAGE_ICONS: Record<string, ReactNode> = {
   manufacturer: <Building2 size={20} />,
@@ -46,7 +45,7 @@ const MobileProductTimeline = ({ product }: { product: Product }) => {
   const normalizedTimeline = useMemo(() => {
     return timeline.map((stage) => ({
       ...stage,
-      status: stage.status.toLowerCase(),
+      status: stage?.status?.toLowerCase(),
     }));
   }, [timeline]);
 
@@ -133,12 +132,11 @@ const MobileProductTimeline = ({ product }: { product: Product }) => {
           imgUrl: productData.imgUrl,
           name: productData.name,
           description: productData.description || "",
-          packs: productData.packs,
           mrp: productData.mrp,
+          serialNo: productData.serialNo,
+          batchNo: productData.batchNo,
         }}
       />
-
-      <Separator className="  bg-gray-300" />
 
       <div className="relative overflow-hidden">
         <motion.div
@@ -196,7 +194,7 @@ const MobileProductTimeline = ({ product }: { product: Product }) => {
         </div>
       </div>
 
-      <div className="p-3">
+      <div className="p-3 pb-0">
         {normalizedTimeline.map((stage, index) => (
           <div key={`${stage.name}-${index}`} className="relative">
             {index !== normalizedTimeline.length - 1 && (
@@ -242,16 +240,18 @@ const MobileProductTimeline = ({ product }: { product: Product }) => {
                 />
               </motion.div>
 
-              <AnimatePresence>
-                {expandedStages[index] && (
-                  <StageDetails
-                    stage={stage}
-                    index={index}
-                    isLast={index === normalizedTimeline.length - 1}
-                    timelineLength={normalizedTimeline.length}
-                  />
-                )}
-              </AnimatePresence>
+              {stage.location ? (
+                <AnimatePresence>
+                  {expandedStages[index] && (
+                    <StageDetails
+                      stage={stage}
+                      index={index}
+                      isLast={index === normalizedTimeline.length - 1}
+                      timelineLength={normalizedTimeline.length}
+                    />
+                  )}
+                </AnimatePresence>
+              ) : null}
             </motion.div>
           </div>
         ))}

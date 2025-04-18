@@ -1,44 +1,31 @@
-import { TABLET_CAPSULE_IMAGE_FALLBACK } from "@/utils";
-
 export default {
   id: "12345",
-  imgUrl: TABLET_CAPSULE_IMAGE_FALLBACK,
-  name: "Paracetamol 500mg",
-  description: "A pack of 10 tablets",
-  packs: 10,
-  mrp: "₹50",
+  imgUrl:
+    "https://www.practostatic.com/practopedia-images/v3/res-750/dolo-650mg-tablet-cold-cough-covid-essentials-15-s_6fbd3435-bffd-428d-9288-ec74ad6a94ef.JPG",
+  name: "DOLO 650MG TAB 15 S",
+  description: "Strip of 15 Tablet",
+  mrp: "₹33.6",
+  serialNo: "ABC123456789",
+  batchNo: "DOBS425B",
   timeline: [
     {
       stage: "Manufacturer",
-      name: "XYZ Pharmaceuticals Ltd.",
-      location: "Mumbai, India",
-      date: "2025-03-01",
+      name: "MICRO LABS LTD.",
+      // location: "Mumbai, India",
+      // date: "2025-03-01",
       status: "Manufactured",
     },
     {
       stage: "Supplier",
-      name: "ABC Distributors",
+      name: "RXpress Distributor",
       location: "Delhi, India",
       date: "2025-03-03",
+      gstIn: "GSTIN123456789",
       status: "Shipped to Supplier 2",
     },
     {
-      stage: "Supplier",
-      name: "PQR Wholesalers",
-      location: "Kolkata, India",
-      date: "2025-03-05",
-      status: "Shipped to Supplier 3",
-    },
-    {
-      stage: "Supplier",
-      name: "LMN Pharma Traders",
-      location: "Hyderabad, India",
-      date: "2025-03-07",
-      status: "Shipped to Retailer",
-    },
-    {
       stage: "Retailer",
-      name: "Model Medicals",
+      name: "UrMedz Retail Pvt LTD.",
       location: "Bangalore, India",
       date: "2025-03-10",
       status: "Available for Purchase",
@@ -46,9 +33,9 @@ export default {
     {
       stage: "Consumer",
       name: "Milind Pandey",
+      phoneNo: "9876543210",
       location: "Bangalore, India",
       date: "2025-03-12",
-      status: "Purchased",
     },
   ],
 };

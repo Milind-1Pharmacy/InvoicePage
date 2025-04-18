@@ -9,18 +9,21 @@ export type ProductStage =
 export interface TimelineStage {
   stage: ProductStage | string;
   name: string;
-  location: string;
-  date: string;
-  status: string;
+  location?: string;
+  date?: string;
+  status?: string;
+  gstIn?: string;
+  phoneNo?: string;
 }
 
 export interface ProductData {
   id: string;
   description?: string;
   name: string;
-  packs: number;
   mrp: string;
   imgUrl?: string;
+  serialNo?: string;
+  batchNo?: string;
 }
 
 export interface Product {
