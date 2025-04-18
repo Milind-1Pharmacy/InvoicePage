@@ -1,4 +1,4 @@
-import "./TruckLoader.css"; 
+import "./TruckLoader.css";
 import { useEffect, useState } from "react";
 
 const TruckLoader = () => {
@@ -18,7 +18,7 @@ const TruckLoader = () => {
   }, []);
 
   return (
-    <div className="loader flex items-center justify-center flex-col bg-gray-200 p-4 rounded-lg border border-slate-400">
+    <div className="loader flex items-center justify-center flex-col bg-slate-200 p-2 rounded-lg border border-slate-200">
       <div className="truckWrapper">
         <div className="truckBody">
           <svg

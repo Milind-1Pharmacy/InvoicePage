@@ -26,7 +26,7 @@ export default function ItemTracking() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-[80vh] my-auto bg-white">
+      <div className="flex items-center justify-center h-[56vh] ">
         <LoadingOverlay />
       </div>
     );
