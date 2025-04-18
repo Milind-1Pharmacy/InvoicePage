@@ -5,7 +5,6 @@ export default {
   name: "DOLO 650MG TAB 15 S",
   description: "Strip of 15 Tablet",
   mrp: "₹33.6",
-  serialNo: "ABC123456789",
   batchNo: "DOBS425B",
   timeline: [
     {

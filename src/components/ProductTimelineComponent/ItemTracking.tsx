@@ -15,7 +15,7 @@ export default function ItemTracking() {
 
   useEffect(() => {
     setProductData({
-      productData: mockProductData,
+      productData: { serialNo: productId, ...mockProductData },
       timeline: mockProductData.timeline,
     });
     setLoading(false);
