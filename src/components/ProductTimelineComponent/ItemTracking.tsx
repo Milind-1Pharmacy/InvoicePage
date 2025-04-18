@@ -44,9 +44,12 @@ export default function ItemTracking() {
 
       <Button
         className="p-6 min-w-full bg-gradient-to-r from-[#2e6acf] to-[#2554a2] text-white text-xl shadow-2xl border border-white"
-        onClick={() =>
-          console.log("Reorder product:", productData.productData.id)
-        }
+        onClick={() => {
+          window.open(
+            "https://webstore.urmedz.com/urmedz_sheraton/cart",
+            "_blank"
+          );
+        }}
       >
         Reorder this Product{" "}
         <FontAwesomeIcon icon={faSmile} size="lg" className="ml-2" />

@@ -1,3 +1,3 @@
 import StoreLogo from "./1P-LOGO.svg";
-
-export { StoreLogo };
+import UrmedzLogo from "./UrmedzLogo.svg";
+export { StoreLogo, UrmedzLogo };
