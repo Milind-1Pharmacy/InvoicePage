@@ -6,6 +6,7 @@ import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import mockProductData from "./mockData";
 import ProductTimeline from "./ProductTimeline";
 import { Product } from "@/utils";
+import LoadingOverlay from "../commanComponents/LoadingOverlay";
 
 export default function ItemTracking() {
   const { itemId: productId } = useParams({ from: "/tracking/$itemId" });
@@ -18,12 +19,16 @@ export default function ItemTracking() {
       productData: { serialNo: productId, ...mockProductData },
       timeline: mockProductData.timeline,
     });
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1800);
   }, [productId]);
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">Loading...</div>
+      <div className="flex items-center justify-center h-[80vh] my-auto bg-white">
+        <LoadingOverlay />
+      </div>
     );
   }
 

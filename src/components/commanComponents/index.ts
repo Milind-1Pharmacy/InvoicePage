@@ -1,4 +1,5 @@
 import FooterComponent from "./FooterComponent";
 import Header from "./Header";
 import { Layout } from "./Layout";
-export { Header, Layout, FooterComponent };
+import TruckLoader from "./LoadingOverlay";
+export { Header, Layout, FooterComponent, TruckLoader };
