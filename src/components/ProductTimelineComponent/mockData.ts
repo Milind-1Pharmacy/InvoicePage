@@ -12,7 +12,6 @@ export default {
       name: "MICRO LABS LTD.",
       // location: "Mumbai, India",
       // date: "2025-03-01",
-      status: "Manufactured",
     },
     {
       stage: "Supplier",
@@ -20,14 +19,12 @@ export default {
       location: "Delhi, India",
       date: "2025-03-03",
       gstIn: "GSTIN123456789",
-      status: "Shipped to Supplier 2",
     },
     {
       stage: "Retailer",
       name: "UrMedz Retail Pvt LTD.",
       location: "Bangalore, India",
       date: "2025-03-10",
-      status: "Available for Purchase",
     },
     {
       stage: "Consumer",
