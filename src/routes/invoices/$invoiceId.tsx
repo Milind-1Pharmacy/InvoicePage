@@ -4,5 +4,5 @@ import { createFileRoute } from "@tanstack/react-router";
 
 
 export const Route = createFileRoute("/invoices/$invoiceId")({
-  component: () => <UserInvoiceInfo />,
+  component: ({ params }) => <UserInvoiceInfo invoiceId={params.invoiceId} />,
 });

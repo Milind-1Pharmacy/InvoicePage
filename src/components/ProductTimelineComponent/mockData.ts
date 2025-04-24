@@ -12,30 +12,32 @@ export default {
       name: "MICRO LABS LTD.",
       // location: "Mumbai, India",
       // date: "2025-03-01",
-      status: "Manufactured",
+      // status: "Manufactured",
     },
     {
       stage: "Supplier",
       name: "RXpress Distributor",
-      location: "Delhi, India",
+      // location: "Delhi, India",
       date: "2025-03-03",
       gstIn: "GSTIN123456789",
-      status: "Shipped to Supplier 2",
+      // status: "Shipped to Supplier 2",
     },
     {
       stage: "Retailer",
       name: "Model Medicals Stores",
       location: "Bangalore, India",
       date: "2025-03-10",
-      status: "Available for Purchase",
+      gstIn: "GSTIN123456789",
+
+      // status: "Available for Purchase",
     },
-    {
-      stage: "Consumer",
-      name: "Milind Pandey",
-      phoneNo: "9876543210",
-      location: "Bangalore, India",
-      date: "2025-03-12",
-    },
+    // {
+    //   stage: "Consumer",
+    //   name: "Milind Pandey",
+    //   phoneNo: "9876543210",
+    //   location: "Bangalore, India",
+    //   date: "2025-03-12",
+    // },
   ],
 };
 //isGSTinVserfirs

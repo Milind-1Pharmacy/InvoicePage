@@ -1,7 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import "animate.css";
-import { Package, Fingerprint, IndianRupee } from "lucide-react";
-
+import {
+  Package,
+  Fingerprint,
+  IndianRupee,
+  ShieldCheck,
+} from "lucide-react";
+import { Button } from "../ui/button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSmile } from "@fortawesome/free-solid-svg-icons";
+import { AuthenticBadge } from "@/assets";
 interface ProductData {
   imgUrl?: string;
   name?: string;
@@ -9,6 +17,7 @@ interface ProductData {
   mrp?: string;
   serialNo?: string;
   batchNo?: string;
+  storeLink?: string;
 }
 
 const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
@@ -40,17 +49,35 @@ const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
   }, []);
 
   return (
-    <div className="w-full mx-auto p-2">
+    <div className="w-full mx-auto p-2 ">
+      <div className="bg-green-200 p-2 rounded-tl-lg rounded-tr-lg border-b border-green-300">
+        <div className="flex items-center justify-between  ">
+          <div className="flex items-center">
+            <img
+              src={AuthenticBadge}
+              alt="Authentic"
+              className="h-10 w-10 mr-2"
+            />
+            <p className="text-green-900 font-bold ">
+              This Product is Verified.
+            </p>
+          </div>
+          <div className="bg-green-100 text-green-800 px-2 py-1 rounded-full flex items-center">
+            <ShieldCheck size={14} className="mr-1" />
+            <span className="font-medium text-xs">Authentic </span>
+          </div>
+        </div>
+      </div>
       <div
         ref={cardRef}
-        className="group relative transition-all duration-300 overflow-hidden animate__animated opacity-0 bg-white rounded-lg border border-gray-100 "
+        className="group relative transition-all duration-300 overflow-hidden animate__animated opacity-0 bg-white rounded-bl-lg rounded-br-lg border border-gray-100 "
         style={{ opacity: 0 }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <div className="flex h-full relative z-10">
           {/* Image */}
-          <div className="w-1/3 p-4 flex items-center justify-center bg-blue-50 rounded-l-lg">
+          <div className="w-1/3 p-2 flex items-center justify-center bg-blue-50 rounded-bl-lg">
             <div
               ref={imageRef}
               className={`transition-transform duration-500 ${
@@ -60,13 +87,13 @@ const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
               <img
                 src={displayProduct.imgUrl || "/api/placeholder/100/100"}
                 alt={displayProduct.name}
-                className="w-24 h-24 object-contain"
+                className="w-28 h-28 object-contain"
               />
             </div>
           </div>
 
           {/* Details */}
-          <div className="w-2/3 p-4 flex flex-col justify-between">
+          <div className="w-2/3 p-3 flex flex-col justify-between">
             <div>
               <h2 className="text-lg font-bold text-gray-800">
                 {displayProduct.name}
@@ -113,6 +140,30 @@ const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex justify-center mt-3">
+        <Button
+          className="group relative px-4 py-5 w-full bg-gradient-to-r from-[#1e81f1] via-[#2e6acf] to-[#2554a2] hover:from-blue-700 hover:to-blue-800 
+               text-white text-lg font-medium tracking-wide rounded-lg
+               shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1
+               border border-blue-400/30 overflow-hidden"
+          onClick={() => {
+            window.open(
+              "https://webstore.urmedz.com/urmedz_sheraton/cart",
+              "_blank"
+            );
+          }}
+        >
+          <span className="flex items-center justify-center">
+            <span>Reorder this Product</span>
+            <FontAwesomeIcon
+              icon={faSmile}
+              size="lg"
+              className="ml-2 transform transition-all duration-300 group-hover:rotate-12"
+            />
+          </span>
+          <span className="absolute inset-0 w-full h-full bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+        </Button>
       </div>
     </div>
   );

@@ -55,7 +55,7 @@ const StageContent = memo(
           ) : (
             stage.name
           )}
-          {stage.stage === "Supplier" && stage.gstIn ? (
+          {stage.stage === "Supplier" || stage.stage === "Retailer" && stage.gstIn ? (
             <BadgeCheck color="green" size={16} />
           ) : null}
         </h3>

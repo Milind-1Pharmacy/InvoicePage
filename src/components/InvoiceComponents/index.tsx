@@ -1,15 +1,10 @@
-import {
-  faUser,
-  faCircleCheck,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InvoiceDetails from "./InvoiceDetails";
-import { useParams } from "@tanstack/react-router";
+
 // import UserCartDetail from "./UserCartDetail";
 
-const UserInvoiceInfo = () => {
-  const { invoiceId } = useParams({ from: "/invoices/$invoiceId" });
-
+const UserInvoiceInfo = ({ invoiceId }: { invoiceId: string }) => {
   return (
     <div className="bg-white rounded-xl shadow-sm py-4 px-3 mt-4 sm:mx-3 max-w-md mb-4 mx-3">
       {/* User greeting section - made slightly larger */}
@@ -33,11 +28,8 @@ const UserInvoiceInfo = () => {
         </div>
       </div>
 
-
-
       {/* Invoice details component */}
       <InvoiceDetails invoiceId={invoiceId} />
-
     </div>
   );
 };
