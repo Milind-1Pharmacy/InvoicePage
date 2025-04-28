@@ -33,6 +33,8 @@ const StageDetails = memo(
       const maskedPortion = "*".repeat(GSTin.length - 8);
       return GstTag + maskedPortion + lastThreeDigit;
     };
+    console.log("stage", stage);
+
     return (
       <motion.div
         initial={{ height: 0, opacity: 0 }}
@@ -91,20 +93,25 @@ const StageDetails = memo(
               </div>
             </motion.div>
           ) : null}
-          <motion.div
-            initial={{ y: 5, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-start gap-3 p-4 bg-white rounded-lg shadow-sm"
-          >
-            <MapPin className="text-gray-400 flex-shrink-0 mt-0.5" size={18} />
-            <div>
-              <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                Location
-              </h4>
-              <p className="text-gray-700 mt-1">{stage.location}</p>
-            </div>
-          </motion.div>
+          {stage.location ? (
+            <motion.div
+              initial={{ y: 5, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="flex items-start gap-3 p-4 bg-white rounded-lg shadow-sm"
+            >
+              <MapPin
+                className="text-gray-400 flex-shrink-0 mt-0.5"
+                size={18}
+              />
+              <div>
+                <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  Location
+                </h4>
+                <p className="text-gray-700 mt-1">{stage.location}</p>
+              </div>
+            </motion.div>
+          ) : null}
 
           <motion.div
             initial={{ y: 5, opacity: 0 }}

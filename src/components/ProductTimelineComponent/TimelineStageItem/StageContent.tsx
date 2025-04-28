@@ -38,7 +38,7 @@ const StageContent = memo(
             {stage.stage}
           </motion.div>
 
-          {stage.location ? (
+          {stage.location || stage.gstIn ? (
             <motion.div
               animate={{ rotate: isExpanded ? 180 : 0 }}
               transition={{ duration: 0.3 }}
@@ -55,7 +55,9 @@ const StageContent = memo(
           ) : (
             stage.name
           )}
-          {stage.stage === "Supplier" || stage.stage === "Retailer" && stage.gstIn ? (
+          
+          {stage.stage === "Supplier" ||
+          (stage.stage === "Retailer" && stage.gstIn) ? (
             <BadgeCheck color="green" size={16} />
           ) : null}
         </h3>

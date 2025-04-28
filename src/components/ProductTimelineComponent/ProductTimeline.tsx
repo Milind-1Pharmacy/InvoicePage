@@ -126,7 +126,7 @@ const MobileProductTimeline = ({ product }: { product: Product }) => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-12">
       <ProductInfoCard
         product={{
           imgUrl: productData.imgUrl,
@@ -240,7 +240,7 @@ const MobileProductTimeline = ({ product }: { product: Product }) => {
                 />
               </motion.div>
 
-              {stage.location ? (
+              {stage.location || stage.gstIn || stage.phoneNo ? (
                 <AnimatePresence>
                   {expandedStages[index] && (
                     <StageDetails
