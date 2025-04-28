@@ -19,9 +19,18 @@ const UserInvoiceInfo = ({ invoiceData }: { invoiceData: any }) => {
   //   !!invoiceData.billDetail.paymentLink ||
   //   invoiceData?.billDetail?.paymentLink?.trim() !== "";
 
-  const isPaid =
+  const toPay =
     !!invoiceData.billDetail.paymentLink ||
-    invoiceData.billDetail.paymentLink !== "";
+    invoiceData.billDetail.paymentLink === "" ||
+    invoiceData.billDetail.paymentLink !== null;
+
+  // console.log(
+  //   "invoiceData.billDetail.paymentLink",
+  //   invoiceData.billDetail.paymentLink !== null,
+  //   invoiceData.billDetail.paymentLink,
+  //   !!invoiceData.billDetail.paymentLink
+  // );
+  // console.log("isPaid", toPay);
 
   return (
     <div className="bg-white rounded-xl shadow-sm py-4 px-3 mt-4 sm:mx-3 max-w-md mb-4 mx-3">
@@ -38,7 +47,7 @@ const UserInvoiceInfo = ({ invoiceData }: { invoiceData: any }) => {
             <h1 className="text-2xl font-semibold text-gray-800 mb-1">
               {invoiceData?.user.name || "Guest"}
             </h1>
-            {isPaid ? (
+            {toPay ? (
               <div className="flex items-center text-orange-400 gap-1 mt-1">
                 <FontAwesomeIcon icon={faCircleCheck} size="xs" />
                 <p className="text-sm font-medium">Payment Pending</p>
@@ -54,7 +63,7 @@ const UserInvoiceInfo = ({ invoiceData }: { invoiceData: any }) => {
       </div>
 
       {/* Invoice details component */}
-      <InvoiceDetails billDetail={invoiceData.billDetail} isPaid={isPaid} />
+      <InvoiceDetails billDetail={invoiceData.billDetail} toPay={toPay} />
     </div>
   );
 };

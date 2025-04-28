@@ -12,10 +12,10 @@ import { CheckCircle, LucideBadgeCheck } from "lucide-react";
 
 interface InvoiceDetailsProps {
   billDetail: any;
-  isPaid: boolean;
+  toPay: boolean;
 }
 
-const InvoiceDetails = ({ billDetail, isPaid }: InvoiceDetailsProps) => {
+const InvoiceDetails = ({ billDetail, toPay }: InvoiceDetailsProps) => {
   const epochValue = billDetail.issuedEpoch;
   const issuedDate = new Date(epochValue * 1000);
   const formattedDate = issuedDate.toLocaleDateString("en-GB", {
@@ -34,7 +34,7 @@ const InvoiceDetails = ({ billDetail, isPaid }: InvoiceDetailsProps) => {
       <div className="bg-white rounded-lg shadow-lg overflow-hidden mt-4 border border-gray-100">
         {/* Header with status banner */}
         <div className="relative">
-          {isPaid ? (
+          {toPay ? (
             <div className="absolute top-0 right-0 w-28 h-28">
               <div className="bg-orange-400 text-white text-xs font-bold py-1 px-8 rotate-45 translate-x-6 translate-y-6 w-32">
                 PENDING
@@ -78,7 +78,7 @@ const InvoiceDetails = ({ billDetail, isPaid }: InvoiceDetailsProps) => {
               <button
                 className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all transform hover:scale-105"
                 onClick={() => {
-                  console.log("Download Invoice");
+                  // console.log("Download Invoice");
                   window.open(billDetail.downloadLink, "_blank");
                 }}
               >
@@ -138,7 +138,7 @@ const InvoiceDetails = ({ billDetail, isPaid }: InvoiceDetailsProps) => {
 
         {/* Action button */}
         <div className="px-6 py-5 border-t border-gray-100">
-          {isPaid ? (
+          {toPay ? (
             <button
               className="w-full bg-gradient-to-r from-[#2e6acf] to-[#2554a2] hover:bg-blue-700 text-white py-3 rounded-md transition-colors font-medium flex items-center justify-center"
               onClick={() => {
