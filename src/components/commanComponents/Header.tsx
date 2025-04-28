@@ -3,30 +3,27 @@ import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { Separator } from "../ui/separator";
 import React from "react";
+import { StoreLogo } from "@/assets";
 
 interface HeaderProps {
-  storeInfo?: any;
+  storeInfo?: {
+    storeName?: string;
+    storeLogo?: string;
+    // add other properties if needed
+  };
 }
 
 const Header: React.FC<HeaderProps> = ({ storeInfo }) => {
   const showIcons = true;
 
   return (
-    <header
-      className="bg-gradient-to-r from-[#1e81f1]  via-[#2e6acf] to-[#2554a2] shadow-md py-2"
-      style={
-        {
-          // borderBottomRightRadius: "24px",
-          // borderBottomLeftRadius: "24px",
-        }
-      }
-    >
+    <header className="bg-gradient-to-r from-[#1e81f1] via-[#2e6acf] to-[#2554a2] shadow-md py-2">
       <div className="max-w-7xl mx-auto py-3 px-4 flex items-center justify-between">
         {/* Logo and Store Name */}
         <div className="flex items-center gap-4 flex-1 min-w-0">
           <div className="bg-white p-2 rounded-full flex-shrink-0 w-14 h-14 shadow-sm flex items-center justify-center">
             <img
-              src={storeInfo.storeLogo}
+              src={storeInfo?.storeLogo ?? StoreLogo}
               alt="Store Logo"
               className="h-full w-full object-contain"
             />
@@ -34,9 +31,9 @@ const Header: React.FC<HeaderProps> = ({ storeInfo }) => {
 
           <h1
             className="text-xl font-medium text-white truncate line-clamp-1"
-            title={storeInfo.storeName} // Shows full name on hover
+            title={storeInfo?.storeName || "Model Medicals Demo"}
           >
-            {storeInfo.storeName}
+            {storeInfo?.storeName || "Model Medicals Demo"}
           </h1>
         </div>
 

@@ -21,7 +21,7 @@ const UserInvoiceInfo = ({ invoiceData }: { invoiceData: any }) => {
 
   const isPaid =
     !!invoiceData.billDetail.paymentLink ||
-    invoiceData.billDetail.paymentLink === "";
+    invoiceData.billDetail.paymentLink !== "";
 
   return (
     <div className="bg-white rounded-xl shadow-sm py-4 px-3 mt-4 sm:mx-3 max-w-md mb-4 mx-3">

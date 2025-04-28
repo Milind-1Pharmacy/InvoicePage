@@ -8,10 +8,7 @@ import {
   faFileDownload,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  CheckCircle,
-  LucideBadgeCheck,
-} from "lucide-react";
+import { CheckCircle, LucideBadgeCheck } from "lucide-react";
 
 interface InvoiceDetailsProps {
   billDetail: any;
@@ -82,6 +79,7 @@ const InvoiceDetails = ({ billDetail, isPaid }: InvoiceDetailsProps) => {
                 className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all transform hover:scale-105"
                 onClick={() => {
                   console.log("Download Invoice");
+                  window.open(billDetail.downloadLink, "_blank");
                 }}
               >
                 <FontAwesomeIcon
@@ -141,15 +139,21 @@ const InvoiceDetails = ({ billDetail, isPaid }: InvoiceDetailsProps) => {
         {/* Action button */}
         <div className="px-6 py-5 border-t border-gray-100">
           {isPaid ? (
-            <button className="w-full bg-gradient-to-r from-[#2e6acf] to-[#2554a2] hover:bg-blue-700 text-white py-3 rounded-md transition-colors font-medium flex items-center justify-center">
+            <button
+              className="w-full bg-gradient-to-r from-[#2e6acf] to-[#2554a2] hover:bg-blue-700 text-white py-3 rounded-md transition-colors font-medium flex items-center justify-center"
+              onClick={() => {
+                window.open(billDetail.paymentLink, "_blank");
+              }}
+            >
               <span>Pay Now</span>
             </button>
           ) : (
             <button
-              className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white py-3 rounded-md transition-all duration-300 font-medium flex items-center justify-center shadow-md"
+              className="w-full bg-gradient-to-r from-emerald-400/70 to-teal-500/70 text-white/80 py-3 rounded-md font-medium flex items-center justify-center shadow-sm cursor-not-allowed opacity-80 border border-green-500
+              "
               disabled
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 text-green-900 font-bold">
                 Paid <CheckCircle size={16} />
               </span>
             </button>
