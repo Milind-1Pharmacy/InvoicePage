@@ -4,7 +4,25 @@ import InvoiceDetails from "./InvoiceDetails";
 
 // import UserCartDetail from "./UserCartDetail";
 
-const UserInvoiceInfo = ({ invoiceId }: { invoiceId: string }) => {
+const UserInvoiceInfo = ({ invoiceData }: { invoiceData: any }) => {
+  // console.log("invoiceId", invoiceId);
+  // In your component or route loader
+  // const invoiceData = fetchInvoiceData(
+  //   "billb7b8b423-21a4-11f0-a914-dde0b8a92bea"
+  // );
+  console.log(invoiceData);
+  // console.log("====================================");
+  // console.log(!!invoiceData.billDetail.paymentLink);
+  // console.log("====================================");
+
+  // const isPaid =
+  //   !!invoiceData.billDetail.paymentLink ||
+  //   invoiceData?.billDetail?.paymentLink?.trim() !== "";
+
+  const isPaid =
+    !!invoiceData.billDetail.paymentLink ||
+    invoiceData.billDetail.paymentLink === "";
+
   return (
     <div className="bg-white rounded-xl shadow-sm py-4 px-3 mt-4 sm:mx-3 max-w-md mb-4 mx-3">
       {/* User greeting section - made slightly larger */}
@@ -18,18 +36,25 @@ const UserInvoiceInfo = ({ invoiceId }: { invoiceId: string }) => {
           </div>
           <div className="animate-fadeIn">
             <h1 className="text-2xl font-semibold text-gray-800 mb-1">
-              Hello Abhisekh,
+              {invoiceData?.user.name || "Guest"}
             </h1>
-            <div className="flex items-center text-orange-400 gap-1 mt-1">
-              <FontAwesomeIcon icon={faCircleCheck} size="xs" />
-              <p className="text-sm font-medium">Payment Pending</p>
-            </div>
+            {isPaid ? (
+              <div className="flex items-center text-orange-400 gap-1 mt-1">
+                <FontAwesomeIcon icon={faCircleCheck} size="xs" />
+                <p className="text-sm font-medium">Payment Pending</p>
+              </div>
+            ) : (
+              <div className="flex items-center text-green-400 gap-1.5 mt-1">
+                <FontAwesomeIcon icon={faCircleCheck} size="lg" />
+                <p className="text-sm font-medium">Paid</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* Invoice details component */}
-      <InvoiceDetails invoiceId={invoiceId} />
+      <InvoiceDetails billDetail={invoiceData.billDetail} isPaid={isPaid} />
     </div>
   );
 };

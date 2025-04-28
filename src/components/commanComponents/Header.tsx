@@ -1,16 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { StoreLogo } from "@/assets";
 import { Separator } from "../ui/separator";
 import React from "react";
 
 interface HeaderProps {
-  storeName: string;
-  showIcons: boolean;
+  storeInfo?: any;
 }
 
-const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
+const Header: React.FC<HeaderProps> = ({ storeInfo }) => {
+  const showIcons = true;
+
   return (
     <header
       className="bg-gradient-to-r from-[#1e81f1]  via-[#2e6acf] to-[#2554a2] shadow-md py-2"
@@ -23,10 +23,10 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
     >
       <div className="max-w-7xl mx-auto py-3 px-4 flex items-center justify-between">
         {/* Logo and Store Name */}
-        <div className="flex items-center gap-3 flex-1 min-w-0">
-          <div className="bg-white p-2 rounded-full flex-shrink-0 w-11 h-11 shadow-sm flex items-center justify-center">
+        <div className="flex items-center gap-4 flex-1 min-w-0">
+          <div className="bg-white p-2 rounded-full flex-shrink-0 w-14 h-14 shadow-sm flex items-center justify-center">
             <img
-              src={StoreLogo}
+              src={storeInfo.storeLogo}
               alt="Store Logo"
               className="h-full w-full object-contain"
             />
@@ -34,9 +34,9 @@ const Header: React.FC<HeaderProps> = ({ storeName, showIcons }) => {
 
           <h1
             className="text-xl font-medium text-white truncate line-clamp-1"
-            title={storeName} // Shows full name on hover
+            title={storeInfo.storeName} // Shows full name on hover
           >
-            {storeName}
+            {storeInfo.storeName}
           </h1>
         </div>
 

@@ -30,3 +30,32 @@ export interface Product {
   timeline: TimelineStage[];
   productData: ProductData;
 }
+
+export interface InvoiceApiResponse {
+  data: {
+    storeActions: {
+      storeName: string;
+      storeLogo: string;
+    };
+    user: {
+      name: string;
+      phone: string;
+    };
+    invoiceDetail: {
+      invoiceId: string;
+      amount: number;
+      issuedEpoch: number;
+      itemsSummary: {
+        totalItems: number;
+      };
+      paymentLink: string;
+    };
+    userMessage: string;
+  };
+  statusCode: number;
+}
+
+export interface RootSearchParams {
+  i?: string; // invoice ID
+  t?: string; // tracking ID
+}

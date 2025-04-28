@@ -1,16 +1,28 @@
 // src/routes/__root.tsx
-import { createRootRoute, Outlet, useSearch } from "@tanstack/react-router";
+import {
+  createRootRoute,
+  Outlet,
+  useLoaderData,
+  useSearch,
+} from "@tanstack/react-router";
 import ProductTimelineComponent from "../components/ProductTimelineComponent/ItemTracking";
 import UserInvoiceInfo from "@/components/InvoiceComponents";
 import { Layout } from "../components/commanComponents/Layout";
+import { fetchInvoiceData } from "@/services/api";
+import { InvoiceApiResponse } from "@/utils/types";
+
+interface RootSearchParams {
+  i?: string;
+  t?: string;
+}
 
 export const Route = createRootRoute({
   component: () => {
-    const search = useSearch({
-      strict: false,
-    }) as { t?: string; i?: string };
+    const search = useSearch({ strict: false }) as RootSearchParams;
+    const { data } = useLoaderData({ from: "__root__" }) as {
+      data: InvoiceApiResponse | null;
+    };
 
-    // If we have specific query parameters, render those components
     if (search.t) {
       return (
         <Layout>
@@ -19,19 +31,30 @@ export const Route = createRootRoute({
       );
     }
 
-    if (search.i) {
+    if (search.i && data) {
       return (
-        <Layout>
-          <UserInvoiceInfo invoiceId={search.i} />
+        <Layout storeInfo={data.data.storeActions}>
+          <UserInvoiceInfo invoiceData={data.data} />
         </Layout>
       );
     }
 
-    // Default case: render the Layout with Outlet for nested routes
     return (
       <Layout>
         <Outlet />
       </Layout>
     );
   },
+  loader: async ({ location }) => {
+    const searchParams = new URLSearchParams(location.search);
+    const invoiceId = searchParams.get("i");
+    if (invoiceId) {
+      return {
+        data: await fetchInvoiceData(invoiceId),
+      };
+    }
+
+    return { data: null };
+  },
+  pendingComponent: () => <div>Loading...</div>,
 });

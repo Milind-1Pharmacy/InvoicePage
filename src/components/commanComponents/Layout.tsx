@@ -1,10 +1,17 @@
-
 import Header from "./Header";
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({
+  children,
+  storeInfo,
+}: {
+  children: React.ReactNode;
+  storeInfo?: any;
+}) {
+  // console.log("storeInfo", storeInfo);
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Header storeName="Model Medicals Stores" showIcons={true} />
+      <Header storeInfo={storeInfo} />
       <main className="flex-1">{children}</main>
       {/* <FooterComponent /> */}
     </div>

@@ -33,7 +33,6 @@ const StageDetails = memo(
       const maskedPortion = "*".repeat(GSTin.length - 8);
       return GstTag + maskedPortion + lastThreeDigit;
     };
-    console.log("stage", stage);
 
     return (
       <motion.div

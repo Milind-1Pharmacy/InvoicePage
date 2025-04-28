@@ -8,22 +8,51 @@ import {
   faFileDownload,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  CheckCircle,
+  LucideBadgeCheck,
+} from "lucide-react";
 
 interface InvoiceDetailsProps {
-  invoiceId: string;
+  billDetail: any;
+  isPaid: boolean;
 }
 
-const InvoiceDetails = ({ invoiceId }: InvoiceDetailsProps) => {
+const InvoiceDetails = ({ billDetail, isPaid }: InvoiceDetailsProps) => {
+  const epochValue = billDetail.issuedEpoch;
+  const issuedDate = new Date(epochValue * 1000);
+  const formattedDate = issuedDate.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+
+  const formattedTime = issuedDate.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
   return (
     <>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden mt-4 border border-gray-100">
         {/* Header with status banner */}
         <div className="relative">
-          <div className="absolute top-0 right-0 w-28 h-28">
-            <div className="bg-orange-400 text-white text-xs font-bold py-1 px-8 rotate-45 translate-x-6 translate-y-6 w-32">
-              PENDING
+          {isPaid ? (
+            <div className="absolute top-0 right-0 w-28 h-28">
+              <div className="bg-orange-400 text-white text-xs font-bold py-1 px-8 rotate-45 translate-x-6 translate-y-6 w-32">
+                PENDING
+              </div>
             </div>
-          </div>
+          ) : (
+            <>
+              <div className="absolute top-0 right-0 w-30 h-28">
+                <div className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white  font-bold py-1 px-8 rotate-43 translate-x-6 translate-y-9 w-44 flex gap-1.5 text-sm items-center">
+                  PAID
+                  <LucideBadgeCheck size={16} />
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="pt-5 pb-3 px-6">
             <div className="flex items-center gap-4">
@@ -32,7 +61,7 @@ const InvoiceDetails = ({ invoiceId }: InvoiceDetailsProps) => {
               </div>
               <div>
                 <h2 className="text-xl font-semibold text-gray-800">Invoice</h2>
-                <p className="text-gray-500 text-sm">#{invoiceId}</p>
+                <p className="text-gray-500 text-sm">#{billDetail.billId}</p>
               </div>
             </div>
           </div>
@@ -44,12 +73,17 @@ const InvoiceDetails = ({ invoiceId }: InvoiceDetailsProps) => {
                 <p className="text-sm opacity-80">Amount Due</p>
                 <div className="flex items-baseline gap-1 mt-1">
                   <span className="text-3xl font-bold">
-                    {RUPEE_SYMBOL} 1,200
+                    {RUPEE_SYMBOL} {billDetail.amount}
                   </span>
                   <span className="text-sm opacity-80 ml-1">INR</span>
                 </div>
               </div>
-              <button className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all transform hover:scale-105">
+              <button
+                className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all transform hover:scale-105"
+                onClick={() => {
+                  console.log("Download Invoice");
+                }}
+              >
                 <FontAwesomeIcon
                   icon={faFileDownload}
                   color="#2e6afc"
@@ -70,11 +104,11 @@ const InvoiceDetails = ({ invoiceId }: InvoiceDetailsProps) => {
                   Issued on
                 </span>
                 <span className="block font-semibold text-gray-800">
-                  27 Oct 2023
+                  {formattedDate}
                 </span>
                 <div className="flex items-center mt-2 text-gray-500">
                   <FontAwesomeIcon icon={faClock} className="text-xs mr-1" />
-                  <span className="text-xs">11:43 AM</span>
+                  <span className="text-xs">{formattedTime}</span>
                 </div>
               </div>
               <div className="bg-blue-100 p-2 mt-3 rounded-full">
@@ -94,7 +128,7 @@ const InvoiceDetails = ({ invoiceId }: InvoiceDetailsProps) => {
                   Summary
                 </span>
                 <span className="block text-lg font-semibold text-gray-800">
-                  3 Items
+                  {billDetail?.itemsSummary.totalItems} Items
                 </span>
               </div>
               <div className="bg-green-100 p-2 mt-3 rounded-full">
@@ -106,9 +140,20 @@ const InvoiceDetails = ({ invoiceId }: InvoiceDetailsProps) => {
 
         {/* Action button */}
         <div className="px-6 py-5 border-t border-gray-100">
-          <button className="w-full bg-gradient-to-r from-[#2e6acf] to-[#2554a2] hover:bg-blue-700 text-white py-3 rounded-md transition-colors font-medium flex items-center justify-center">
-            <span>Pay Now</span>
-          </button>
+          {isPaid ? (
+            <button className="w-full bg-gradient-to-r from-[#2e6acf] to-[#2554a2] hover:bg-blue-700 text-white py-3 rounded-md transition-colors font-medium flex items-center justify-center">
+              <span>Pay Now</span>
+            </button>
+          ) : (
+            <button
+              className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white py-3 rounded-md transition-all duration-300 font-medium flex items-center justify-center shadow-md"
+              disabled
+            >
+              <span className="flex items-center gap-2">
+                Paid <CheckCircle size={16} />
+              </span>
+            </button>
+          )}
         </div>
       </div>
       <div className="bg-gray-100 p-1 justify-center items-center">
