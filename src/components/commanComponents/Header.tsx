@@ -9,12 +9,21 @@ interface HeaderProps {
   storeInfo?: {
     storeName?: string;
     storeLogo?: string;
-    // add other properties if needed
+    support?: {
+      phone?: string;
+      whatsapp?: string; // e.g. "https://wa.me/8310287845"
+    };
   };
 }
 
 const Header: React.FC<HeaderProps> = ({ storeInfo }) => {
   const showIcons = true;
+  const storeName = storeInfo?.storeName || "Model Medicals Demo";
+  const storeLogo = storeInfo?.storeLogo ?? StoreLogo;
+  const whatsappLink = storeInfo?.support?.whatsapp || "#";
+  const phoneLink = storeInfo?.support?.phone
+    ? `tel:${storeInfo.support.phone}`
+    : "#";
 
   return (
     <header className="bg-gradient-to-r from-[#1e81f1] via-[#2e6acf] to-[#2554a2] shadow-md py-2">
@@ -23,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ storeInfo }) => {
         <div className="flex items-center gap-4 flex-1 min-w-0">
           <div className="bg-white p-2 rounded-full flex-shrink-0 w-14 h-14 shadow-sm flex items-center justify-center">
             <img
-              src={storeInfo?.storeLogo ?? StoreLogo}
+              src={storeLogo}
               alt="Store Logo"
               className="h-full w-full object-contain"
             />
@@ -31,9 +40,9 @@ const Header: React.FC<HeaderProps> = ({ storeInfo }) => {
 
           <h1
             className="text-xl font-medium text-white truncate line-clamp-1"
-            title={storeInfo?.storeName || "Model Medicals Demo"}
+            title={storeName}
           >
-            {storeInfo?.storeName || "Model Medicals Demo"}
+            {storeName}
           </h1>
         </div>
 
@@ -41,7 +50,9 @@ const Header: React.FC<HeaderProps> = ({ storeInfo }) => {
         {showIcons && (
           <div className="flex items-center gap-2">
             <a
-              href="#"
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-2 rounded-full hover:bg-blue-500 transition-colors duration-200"
               aria-label="Contact us on WhatsApp"
             >
@@ -58,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({ storeInfo }) => {
             />
 
             <a
-              href="#"
+              href={phoneLink}
               className="p-2 rounded-full hover:bg-blue-500 transition-colors duration-200"
               aria-label="Call us"
             >
