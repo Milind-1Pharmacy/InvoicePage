@@ -19,9 +19,6 @@ export default function ItemTracking({
       productData: { serialNo: productId, ...data },
       timeline: data.timeline,
     });
-    setTimeout(() => {
-      setLoading(false);
-    }, 1800);
   }, [productId]);
 
   if (loading) {
