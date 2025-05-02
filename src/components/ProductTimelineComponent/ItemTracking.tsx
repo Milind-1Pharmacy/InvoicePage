@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 // import mockProductData from "./mockData";
 import ProductTimeline from "./ProductTimeline";
 import { Product } from "@/utils";
-import LoadingOverlay from "../commanComponents/LoadingOverlay";
+// import LoadingOverlay from "../commanComponents/LoadingOverlay";
 
 export default function ItemTracking({
   printCode: productId,
@@ -12,22 +12,15 @@ export default function ItemTracking({
   productData: any;
 }) {
   const [productData, setProductData] = useState<Product | null>(null);
-  const [loading] = useState(false);
 
   useEffect(() => {
-    setProductData({
-      productData: { serialNo: productId, ...data },
-      timeline: data.timeline,
-    });
-  }, [productId]);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-[56vh] ">
-        <LoadingOverlay />
-      </div>
-    );
-  }
+    if (data) {
+      setProductData({
+        productData: { serialNo: productId, ...data },
+        timeline: data.timeline,
+      });
+    }
+  }, [productId, data]);
 
   if (!productData) {
     return (
