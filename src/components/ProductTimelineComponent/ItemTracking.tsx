@@ -12,7 +12,7 @@ export default function ItemTracking({
   productData: any;
 }) {
   const [productData, setProductData] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(true);
 
   useEffect(() => {
     setProductData({
