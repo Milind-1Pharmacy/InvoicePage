@@ -11,7 +11,6 @@ export interface TimelineStage {
   name: string;
   location?: string;
   date?: string;
-  status?: string;
   gstIn?: string;
   phoneNo?: string;
 }
@@ -58,4 +57,24 @@ export interface InvoiceApiResponse {
 export interface RootSearchParams {
   i?: string; // invoice ID
   t?: string; // tracking ID
+}
+
+
+export interface ItemTrackingApiResponse {
+  data: {
+    storeActions: {
+      storeName: string;
+      storeLogo: string;
+    };
+    item :{
+      storeActions: undefined;
+      id : string;
+      name: string;
+      mrp: string;
+      imgUrl?: string;
+      serialNo: string;
+      batchNo: string;
+      timeline: TimelineStage[];
+    }
+  };
 }

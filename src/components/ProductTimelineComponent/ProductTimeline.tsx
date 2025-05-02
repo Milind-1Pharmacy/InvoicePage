@@ -45,7 +45,6 @@ const MobileProductTimeline = ({ product }: { product: Product }) => {
   const normalizedTimeline = useMemo(() => {
     return timeline.map((stage) => ({
       ...stage,
-      status: stage?.status?.toLowerCase(),
     }));
   }, [timeline]);
 

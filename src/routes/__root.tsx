@@ -1,18 +1,19 @@
-// src/routes/__root.tsx
-import {
-  createRootRoute,
-  Outlet,
-  useLoaderData,
-  useSearch,
-  useRouterState,
-} from "@tanstack/react-router";
-import ProductTimelineComponent from "../components/ProductTimelineComponent/ItemTracking";
-import UserInvoiceInfo from "@/components/InvoiceComponents";
+import { createRootRoute, Outlet, useLoaderData } from "@tanstack/react-router";
+// import ProductTimelineComponent from "../components/ProductTimelineComponent/ItemTracking";
+// import UserInvoiceInfo from "@/components/InvoiceComponents";
 import { Layout } from "../components/commanComponents/Layout";
-import { fetchInvoiceData } from "@/services/api";
-import { InvoiceApiResponse } from "@/utils/types";
+import { fetchInvoiceData, fetchProductData } from "@/services/api";
+import { InvoiceApiResponse, ItemTrackingApiResponse } from "@/utils/types";
 import { TruckLoader } from "@/components/commanComponents";
-import { useState, useEffect } from "react";
+import React, { Suspense } from "react";
+
+const ProductTimelineComponent = React.lazy(
+  () => import("../components/ProductTimelineComponent/ItemTracking")
+);
+
+const UserInvoiceInfo = React.lazy(
+  () => import("../components/InvoiceComponents")
+);
 
 interface RootSearchParams {
   i?: string;
@@ -21,45 +22,32 @@ interface RootSearchParams {
 
 export const Route = createRootRoute({
   component: () => {
-    const search = useSearch({ strict: false }) as RootSearchParams;
-    const routerState = useRouterState();
+    const searchParams = new URLSearchParams(window.location.search);
+    const search = {
+      i: searchParams.get("i") || undefined,
+      t: searchParams.get("t") || undefined,
+    } as RootSearchParams;
+
+    const printCode = search.t?.startsWith("P")
+      ? search.t.substring(1)
+      : search.t;
+    // console.log("printCode", printCode);
+
     const loaderData = useLoaderData({ from: "__root__" }) as {
-      data: InvoiceApiResponse | null;
+      data: InvoiceApiResponse | ItemTrackingApiResponse | null;
       isLoading?: boolean;
     };
-    const { data, isLoading } = loaderData;
+    const { data } = loaderData;
 
-    // State to track if we're loading data
-    const [isLoadingData, setIsLoadingData] = useState(true);
-
-    useEffect(() => {
-      // Show loader when:
-      // 1. Route is loading, OR
-      // 2. We have an invoice ID but no data yet, OR
-      // 3. The loader is explicitly in loading state
-      const shouldLoad =
-        routerState.isLoading || (search.i && !data) || isLoading;
-      console.log("Setting isLoadingData to:", shouldLoad);
-      setIsLoadingData(shouldLoad ?? false);
-    }, [routerState.isLoading, search.i, data, isLoading]);
-
-    console.log("Current isLoadingData:", isLoadingData);
-
-    // Show loading state when data is being fetched
-    if (isLoadingData) {
+    if (printCode && data && "item" in data.data) {
       return (
-        <Layout>
-          <div className="flex justify-center items-center h-screen">
-            <TruckLoader />
-          </div>
-        </Layout>
-      );
-    }
-
-    if (search.t) {
-      return (
-        <Layout>
-          <ProductTimelineComponent itemId={search.t} />
+        <Layout storeInfo={data?.data?.item?.storeActions ?? undefined}>
+          <Suspense fallback={<TruckLoader />}>
+            <ProductTimelineComponent
+              printCode={printCode}
+              productData={data.data.item}
+            />
+          </Suspense>
         </Layout>
       );
     }
@@ -67,11 +55,9 @@ export const Route = createRootRoute({
     if (search.i && data) {
       return (
         <Layout storeInfo={data.data.storeActions}>
-          {!isLoading ? (
+          <Suspense fallback={<TruckLoader />}>
             <UserInvoiceInfo invoiceData={data.data} />
-          ) : (
-            <TruckLoader />
-          )}{" "}
+          </Suspense>
         </Layout>
       );
     }
@@ -84,13 +70,29 @@ export const Route = createRootRoute({
   },
   loader: async ({ location }) => {
     const searchParams = new URLSearchParams(location.search);
+    let printCode = searchParams.get("t");
     const invoiceId = searchParams.get("i");
+
+    // if (printCode?.startsWith("P")) {
+    //   printCode = printCode.substring(1);
+    // }
+
     if (invoiceId) {
       try {
         const data = await fetchInvoiceData(invoiceId);
         return { data, isLoading: false };
       } catch (error) {
         console.error("Failed to fetch invoice data:", error);
+        return { data: null, isLoading: false };
+      }
+    }
+
+    if (printCode) {
+      try {
+        const data = await fetchProductData(printCode);
+        return { data, isLoading: false };
+      } catch (error) {
+        console.error("Failed to fetch product data:", error);
         return { data: null, isLoading: false };
       }
     }

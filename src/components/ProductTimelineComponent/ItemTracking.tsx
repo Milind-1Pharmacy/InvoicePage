@@ -1,21 +1,23 @@
 import { useState, useEffect } from "react";
-import mockProductData from "./mockData";
+// import mockProductData from "./mockData";
 import ProductTimeline from "./ProductTimeline";
 import { Product } from "@/utils";
 import LoadingOverlay from "../commanComponents/LoadingOverlay";
 
 export default function ItemTracking({
-  itemId: productId,
+  printCode: productId,
+  productData: data,
 }: {
-  itemId: string;
+  printCode: string;
+  productData: any;
 }) {
   const [productData, setProductData] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setProductData({
-      productData: { serialNo: productId, ...mockProductData },
-      timeline: mockProductData.timeline,
+      productData: { serialNo: productId, ...data },
+      timeline: data.timeline,
     });
     setTimeout(() => {
       setLoading(false);

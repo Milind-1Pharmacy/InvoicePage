@@ -7,7 +7,7 @@ export function Layout({
   children: React.ReactNode;
   storeInfo?: any;
 }) {
-  // console.log("storeInfo", storeInfo);
+  console.log("storeInfo", storeInfo);
 
   return (
     <div className="min-h-screen flex flex-col">

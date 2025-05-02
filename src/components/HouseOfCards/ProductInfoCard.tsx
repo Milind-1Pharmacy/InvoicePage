@@ -1,15 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "animate.css";
-import {
-  Package,
-  Fingerprint,
-  IndianRupee,
-  ShieldCheck,
-} from "lucide-react";
+import { Package, Fingerprint, IndianRupee, ShieldCheck } from "lucide-react";
 import { Button } from "../ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { AuthenticBadge } from "@/assets";
+import { TABLET_CAPSULE_IMAGE_FALLBACK } from "@/utils";
 interface ProductData {
   imgUrl?: string;
   name?: string;
@@ -85,7 +81,7 @@ const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
               }`}
             >
               <img
-                src={displayProduct.imgUrl || "/api/placeholder/100/100"}
+                src={displayProduct.imgUrl || TABLET_CAPSULE_IMAGE_FALLBACK}
                 alt={displayProduct.name}
                 className="w-28 h-28 object-contain"
               />

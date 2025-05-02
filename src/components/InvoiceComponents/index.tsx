@@ -5,32 +5,10 @@ import InvoiceDetails from "./InvoiceDetails";
 // import UserCartDetail from "./UserCartDetail";
 
 const UserInvoiceInfo = ({ invoiceData }: { invoiceData: any }) => {
-  // console.log("invoiceId", invoiceId);
-  // In your component or route loader
-  // const invoiceData = fetchInvoiceData(
-  //   "billb7b8b423-21a4-11f0-a914-dde0b8a92bea"
-  // );
-  console.log(invoiceData);
-  // console.log("====================================");
-  // console.log(!!invoiceData.billDetail.paymentLink);
-  // console.log("====================================");
-
-  // const isPaid =
-  //   !!invoiceData.billDetail.paymentLink ||
-  //   invoiceData?.billDetail?.paymentLink?.trim() !== "";
-
   const toPay =
     !!invoiceData.billDetail.paymentLink ||
     invoiceData.billDetail.paymentLink === "" ||
     invoiceData.billDetail.paymentLink !== null;
-
-  // console.log(
-  //   "invoiceData.billDetail.paymentLink",
-  //   invoiceData.billDetail.paymentLink !== null,
-  //   invoiceData.billDetail.paymentLink,
-  //   !!invoiceData.billDetail.paymentLink
-  // );
-  // console.log("isPaid", toPay);
 
   return (
     <div className="bg-white rounded-xl shadow-sm py-4 px-3 mt-4 sm:mx-3 max-w-md mb-4 mx-3">
