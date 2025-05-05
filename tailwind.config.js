@@ -5,9 +5,12 @@ export default {
     extend: {
       fontFamily: {
         ubuntu: ["Ubuntu", "sans-serif"],
-
       },
-      
+      screens: {
+        "xs-425": { max: "425px" },
+        "xs-375": { max: "375px" },
+        "xs-325": { max: "325px" },
+      },
     },
   },
   plugins: [],

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { AuthenticBadge } from "@/assets";
 import { TABLET_CAPSULE_IMAGE_FALLBACK } from "@/utils";
+import "../../App.css";
 interface ProductData {
   imgUrl?: string;
   name?: string;
@@ -54,9 +55,7 @@ const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
               alt="Authentic"
               className="h-10 w-10 mr-2"
             />
-            <p className="text-green-900 font-bold text-xs">
-              This Product is Verified.
-            </p>
+            <p className="product-verified">This Product is Verified.</p>
           </div>
           <div className="bg-green-100 text-green-800 px-2 py-1 rounded-full flex items-center border-1 border-green-400">
             <ShieldCheck size={14} className="mr-1" />
