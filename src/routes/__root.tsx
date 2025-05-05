@@ -1,12 +1,13 @@
 import { createRootRoute, Outlet, useLoaderData } from "@tanstack/react-router";
-// import ProductTimelineComponent from "../components/ProductTimelineComponent/ItemTracking";
-// import UserInvoiceInfo from "@/components/InvoiceComponents";
 import { Layout } from "../components/commanComponents/Layout";
 import { fetchInvoiceData, fetchProductData } from "@/services/api";
 import { InvoiceApiResponse, ItemTrackingApiResponse } from "@/utils/types";
-import { TruckLoader } from "@/components/commanComponents";
+import { ErrorComponent, TruckLoader } from "@/components/commanComponents";
 import React, { Suspense } from "react";
 
+if (typeof window !== "undefined") {
+  window.__LAST_API_RESPONSE = window.__LAST_API_RESPONSE || {};
+}
 const ProductTimelineComponent = React.lazy(
   () => import("../components/ProductTimelineComponent/ItemTracking")
 );
@@ -31,13 +32,22 @@ export const Route = createRootRoute({
     const printCode = search.t?.startsWith("P")
       ? search.t.substring(1)
       : search.t;
-    // console.log("printCode", printCode);
 
     const loaderData = useLoaderData({ from: "__root__" }) as {
       data: InvoiceApiResponse | ItemTrackingApiResponse | null;
       isLoading?: boolean;
+      error?: { userMessage: string; errorCode: number };
     };
-    const { data } = loaderData;
+
+    const { data, error } = loaderData;
+
+    // If there's an error, save it to window object and render the error component
+    if (error) {
+      if (typeof window !== "undefined") {
+        window.__LAST_API_RESPONSE = { error };
+      }
+      return <ErrorComponent />;
+    }
 
     if (printCode && data && "item" in data.data) {
       return (
@@ -73,38 +83,61 @@ export const Route = createRootRoute({
     let printCode = searchParams.get("t");
     const invoiceId = searchParams.get("i");
 
-    // if (printCode?.startsWith("P")) {
-    //   printCode = printCode.substring(1);
-    // }
-
     if (invoiceId) {
       try {
-        const data = await fetchInvoiceData(invoiceId);
-        return { data, isLoading: false };
+        const response = await fetchInvoiceData(invoiceId);
+
+        // Check if response contains an error despite 200 status
+        if (response && response.error) {
+          return {
+            data: null,
+            isLoading: false,
+            error: response.error,
+          };
+        }
+
+        return { data: response, isLoading: false };
       } catch (error) {
         console.error("Failed to fetch invoice data:", error);
-        return { data: null, isLoading: false };
+        return {
+          data: null,
+          isLoading: false,
+          error: {
+            userMessage: "Failed to fetch invoice data",
+            errorCode: 500,
+          },
+        };
       }
     }
 
     if (printCode) {
       try {
-        const data = await fetchProductData(printCode);
-        return { data, isLoading: false };
+        const response = await fetchProductData(printCode);
+
+        if (response && response.error) {
+          return {
+            data: null,
+            isLoading: false,
+            error: response.error,
+          };
+        }
+
+        return { data: response, isLoading: false };
       } catch (error) {
         console.error("Failed to fetch product data:", error);
-        return { data: null, isLoading: false };
+        return {
+          data: null,
+          isLoading: false,
+          error: {
+            userMessage: "Failed to fetch product data",
+            errorCode: 500,
+          },
+        };
       }
     }
     return { data: null, isLoading: false };
   },
-  errorComponent: () => (
-    <Layout>
-      <div className="flex justify-center items-center h-screen">
-        Error occurred...
-      </div>
-    </Layout>
-  ),
+  errorComponent: () => <ErrorComponent />,
   pendingComponent: () => (
     <Layout>
       <div className="flex justify-center items-center h-screen">
