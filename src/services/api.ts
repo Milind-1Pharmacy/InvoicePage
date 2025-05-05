@@ -24,7 +24,7 @@ export const fetchInvoiceData = async (billId: string) => {
 export const fetchProductData = async (printCode: string) => {
   try {
     const response = await axios.get(
-      "https://apiv2.1pharmacy.io/test4/fetch_item_tracking_details",
+      "https://apiv2.1pharmacy.io/test3/fetch_item_tracking_details",
       {
         params: {
           printCode: printCode,
