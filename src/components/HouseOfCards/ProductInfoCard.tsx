@@ -54,13 +54,13 @@ const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
               alt="Authentic"
               className="h-10 w-10 mr-2"
             />
-            <p className="text-green-900 font-bold ">
+            <p className="text-green-900 font-bold text-xs">
               This Product is Verified.
             </p>
           </div>
-          <div className="bg-green-100 text-green-800 px-2 py-1 rounded-full flex items-center">
+          <div className="bg-green-100 text-green-800 px-2 py-1 rounded-full flex items-center border-1 border-green-400">
             <ShieldCheck size={14} className="mr-1" />
-            <span className="font-medium text-xs">Authentic </span>
+            <span className="font-medium text-[10px]">Authentic </span>
           </div>
         </div>
       </div>
@@ -151,7 +151,7 @@ const HorizontalPharmacyCard = ({ product }: { product: ProductData }) => {
           }}
         >
           <span className="flex items-center justify-center">
-            <span>Reorder this Product</span>
+            <span className="text-[16px]">Reorder this Product</span>
             <FontAwesomeIcon
               icon={faSmile}
               size="lg"
