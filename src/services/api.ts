@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchInvoiceData = async (billId: string) => {
   try {
     const response = await axios.get(
-      "https://apiv2.1pharmacy.io/staging/fetch_invoice_tracking_details",
+      "https://apiv2.1pharmacy.io/test3/fetch_invoice_tracking_details",
       {
         params: {
           billId: billId,
